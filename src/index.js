@@ -12,9 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = process.env.PORT || 4000;
 const clientDist = path.resolve(__dirname, "../../client/dist");
-const allowedOrigins = (
-  process.env.CLIENT_URL || "https://senyum-dental.vercel.app"
-)
+const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:5173")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
