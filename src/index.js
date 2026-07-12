@@ -80,6 +80,13 @@ app.use((error, req, res, next) => {
 });
 
 // 3. Log Port yang dinamis dan tidak membingungkan saat di lokal
-app.listen(port, () => {
-  console.log(`Dental clinic API running on port: ${port}`);
-});
+// Hanya jalankan app.listen() saat dijalankan sebagai server biasa (lokal/VPS/Render dst).
+// Di Vercel, file ini di-import sebagai serverless function handler lewat `export default app`,
+// jadi app.listen() tidak dipakai (dan tidak perlu, karena Vercel yang handle listening-nya).
+if (process.env.VERCEL !== "1") {
+  app.listen(port, () => {
+    console.log(`Dental clinic API running on port: ${port}`);
+  });
+}
+
+export default app;
